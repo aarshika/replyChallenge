@@ -2,9 +2,8 @@
 #include <iostream>
 #include <iterator>
 #include <set>
+#include<fstream>
 using namespace std;
-
-// bool compareString(const string& string1, const string& string2);
 
 class Employee {
 public:
@@ -12,7 +11,7 @@ public:
     int bonus;
 };
 
-class Developer : public Employee {
+class Developer : Employee {
 public:
     string *skills;
     int skillCount;
@@ -29,35 +28,24 @@ public:
     }
 };
 
-class Manager : public Employee {};
+class Manager : Employee {};
 
-// int WP(Developer di, Developer dj) {
-//     set<string> si;
-//     for (int i = 0; i < di.skillCount; i++) {
-//         si.insert(di.skills[i]);
-//     }
-
-//     set<string> sj;
-//     for (int i = 0; i < dj.skillCount; i++) {
-//         sj.insert(dj.skills[i]);
-//     }
-
-//     set<string> intersect;
-//     set_intersection(si.begin(), si.end(), sj.begin(), sj.end(), intersect.begin(), compareString);
-
-//     // cout << intersect.size();
-// }
-
-// bool compareString(const string& string1, const string& string2) {
-//   return string1.compare(string2);
-// }
-
-int BP(Developer &di, Developer &dj){
-    if(!di.company.compare(dj.company)){
-        return di.bonus * dj.bonus;
+int WP(Developer di, Developer dj) {
+    set<string> si;
+    for(int i = 0; i < di.skillCount; i++){
+        si.insert(di.skills[i]);
     }
-}
 
+    set<string> sj;
+    for(int i = 0; i < dj.skillCount; i++){
+        sj.insert(dj.skills[i]);
+    }
+
+    set<int> intersect;
+    set_intersection(si.begin(),si.end(),sj.begin(),sj.end(), back_inserter(intersect));
+                  
+    cout << intersect.size();
+}
 
 int main() {
     string *s1 = new string[2];
@@ -66,6 +54,7 @@ int main() {
     Developer d1("opn", 7, 2, s1);
     Developer d2("opn", 7, 2, s1);
     WP(d1, d2);
+    
 
     // string a = "abcdk57";
     // string b = "abcdk57";
@@ -81,4 +70,38 @@ int main() {
     //     }
 
     // cout << c << '\n';
+    
+    ifstream fp;
+    fp.open("a_solar.txt");
+    char c;
+    int height, width;
+    fp>>width>>height;
+    int Mat1[height][width];
+    for(int i=0;i<height;i++)
+    {
+        for(int j=0;j<width;j++)
+        {
+            fp>>c;
+            Mat1[i][j] == c;
+        }
+    }
+    int dev,bonus,num_skills,man;
+    string company,skills;
+    fp>>dev;
+    for(int i=0;i<dev;i++)
+    {
+        fp>>company;
+        fp>>bonus>>num_skills;
+        string array[num_skills];
+        for(int j=0;j<num_skills;j++)
+        {
+            fp>>skills;
+            array[j] == skills;
+        }
+    }
+    fp>>man;
+    for(int i=0;i<man;i++)
+    {
+        fp>>company>>bonus;
+    }
 }
