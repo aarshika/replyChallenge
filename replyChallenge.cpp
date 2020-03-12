@@ -4,13 +4,15 @@
 #include <set>
 using namespace std;
 
+// bool compareString(const string& string1, const string& string2);
+
 class Employee {
 public:
     string company;
     int bonus;
 };
 
-class Developer : Employee {
+class Developer : public Employee {
 public:
     string *skills;
     int skillCount;
@@ -27,24 +29,35 @@ public:
     }
 };
 
-class Manager : Employee {};
+class Manager : public Employee {};
 
-int WP(Developer di, Developer dj) {
-    set<string> si;
-    for(int i = 0; i < di.skillCount; i++){
-        si.insert(di.skills[i]);
+// int WP(Developer di, Developer dj) {
+//     set<string> si;
+//     for (int i = 0; i < di.skillCount; i++) {
+//         si.insert(di.skills[i]);
+//     }
+
+//     set<string> sj;
+//     for (int i = 0; i < dj.skillCount; i++) {
+//         sj.insert(dj.skills[i]);
+//     }
+
+//     set<string> intersect;
+//     set_intersection(si.begin(), si.end(), sj.begin(), sj.end(), intersect.begin(), compareString);
+
+//     // cout << intersect.size();
+// }
+
+// bool compareString(const string& string1, const string& string2) {
+//   return string1.compare(string2);
+// }
+
+int BP(Developer &di, Developer &dj){
+    if(!di.company.compare(dj.company)){
+        return di.bonus * dj.bonus;
     }
-
-    set<string> sj;
-    for(int i = 0; i < dj.skillCount; i++){
-        sj.insert(dj.skills[i]);
-    }
-
-    set<int> intersect;
-    set_intersection(si.begin(),si.end(),sj.begin(),sj.end(), back_inserter(intersect));
-                  
-    cout << intersect.size();
 }
+
 
 int main() {
     string *s1 = new string[2];
